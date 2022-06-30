@@ -1,51 +1,50 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 col-xl-8">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1 class="h4">List of personal_informations</h1>
-                    <a href="{{ path("personalInformation_create") }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-                </div>
-                <table class="table table-striped table-hovered mb-0">
-                    <thead>
-                        <tr>
-                            <th class="text-center text-uppercase">Id</th>
-                            <th class="text-center text-uppercase">firstname</th>
-                            <th class="text-center text-uppercase">lastname</th>
-                            <th class="text-center text-uppercase">email</th>
-                            <th class="text-center text-uppercase">address</th>
-                            <th class="text-center text-uppercase">phone Number</th>
-                            <th class="text-center text-uppercase">linkedin Link</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if app.user %}
-  
-
-                        {% for personalInformation in app.user.personalInformation %}
-                            <tr>
-                                <td class="text-center align-middle">{{ personalInformation.id }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.firstname }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.lastname }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.address }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.phoneNumber }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.linkedinLink }}</td>
-                                <td class="text-center align-middle">
-                                    <a href="{{ path("personalInformation_update", { id: personalInformation.id }) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                    <a href="{{ path("personalInformation_delete", { id: personalInformation.id }) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="5" class="text-center align-middle">No personal informations</td>
-                            </tr>
-                        {% endfor %}
-                        {% endif %}
-                    </tbody>
-                </table>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="h4">List of personal_informations</h1>
+                <a href="{{ path("personalInformation_create") }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
             </div>
+            <table class="table table-striped table-hovered mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center text-uppercase">Id</th>
+                        <th class="text-center text-uppercase">firstname</th>
+                        <th class="text-center text-uppercase">lastname</th>
+                        <th class="text-center text-uppercase">address</th>
+                        <th class="text-center text-uppercase">phone Number</th>
+                        <th class="text-center text-uppercase">linkedin Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if app.user %}
+                    
+                    
+                    {% for personalInformation in app.user.personalInformation %}
+                    <tr>
+                        <td class="text-center align-middle">{{ personalInformation.id }}</td>
+                        <td class="text-center align-middle">{{ personalInformation.firstname }}</td>
+                        <td class="text-center align-middle">{{ personalInformation.lastname }}</td>
+                        <td class="text-center align-middle">{{ personalInformation.address }}</td>
+                        <td class="text-center align-middle">{{ personalInformation.phoneNumber }}</td>
+                        <td class="text-center align-middle">{{ personalInformation.linkedinLink }}</td>
+                        <td class="text-center align-middle">
+                            <a href="{{ path("personalInformation_update", { id: personalInformation.id }) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path("personalInformation_delete", { id: personalInformation.id }) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center align-middle">No personal informations</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 {% endblock %}

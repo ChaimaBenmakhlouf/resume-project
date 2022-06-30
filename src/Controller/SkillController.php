@@ -15,14 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SkillController extends AbstractController
 {
-
+    
     #[Route('/api/skills', name: 'api_skills_collection_get')]
     public function collection(SkillRepository $skillRepository): JsonResponse
     {
         return $this->json($skillRepository->findAll());
     }
-
-
+    
+    
     #[Route('/skill', name: 'skill_manage')]
     public function manage(SkillRepository $skillRepository): Response
     {
@@ -31,22 +31,22 @@ class SkillController extends AbstractController
             'skills' => $skills,
         ]);
     }
-
+    
     #[Route('/skill/create', name: 'skill_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $skill = new Skill();
         $form = $this->createForm(SkillType::class, $skill)->handleRequest($request);
-        // $form->handleRequest($request);
-
+        
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $skill->setUser($this->getUser());
-
+            
             $entityManager->persist($skill);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('skill_manage', [], Response::HTTP_SEE_OTHER);
-
+            
         }
         return $this->render('skill/create.html.twig', [
             'form' => $form->createView(),
@@ -55,29 +55,28 @@ class SkillController extends AbstractController
     #[Route('skill/update/{id}', name: 'skill_update')]
     public function update(Skill $skill, Request $request, EntityManagerInterface $entityManager): Response
     {
-       
+        
         $form = $this->createForm(SkillType::class, $skill)->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $skill->setUser($this->getUser());
-
+            
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('skill_manage', [], Response::HTTP_SEE_OTHER);
-
+            
         }
         return $this->render('skill/update.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-
+    
     #[Route('skill/delete/{id}', name: 'skill_delete')]
     public function delete(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$skill->getId(), $request->request->get('_token'))) {
         $entityManager->remove($skill);
         $entityManager->flush();
-        }
+        
         return $this->redirectToRoute('skill_manage', [], Response::HTTP_SEE_OTHER);
     }
 }

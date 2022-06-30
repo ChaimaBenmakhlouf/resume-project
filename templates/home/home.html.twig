@@ -1,69 +1,81 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-12">
-            <h3>Personal informations</h3>
-            <div id="personnalInformations"></div>
-            {% if app.user %}
-            {% for personalInformation in app.user.personalInformation %}
-
-            <p>{{personalInformation.firstname}}</p>
-            <p>{{personalInformation.lastname}}</p>
-            <p>{{personalInformation.address}}</p>
-            <p>{{personalInformation.phoneNumber}}</p>
-            <p>{{personalInformation.linkedinLink}}</p>
-            {% endfor %}
-            {% endif %} 
-            <h3>Languages</h3>
-            <ul class="list-group" id="languages"></ul>
-            {% if app.user %}
-            {% for languageSpoken in app.user.languageSpokens %}
-
-            <p>{{languageSpoken.name}}</p>
-            <p>{{languageSpoken.level}}</p>
-            {% endfor %}
-            {% endif %} 
-             <h3>Hobbies</h3>
-             <ul class="list-group" id="hobbies"></ul>
-             {% if app.user %}
-             {% for hobbie in app.user.hobbies %}
-
-             <p>{{hobbie.name}}</p>
-             {% endfor %}
-             {% endif %} 
-            <h3>Diplomas</h3>
-            <ul class="list-group" id="diplomas"></ul>
-            {% if app.user %}
-            {% for diploma in app.user.diplomas %}
-
-            <p>{{diploma.title}}</p>
-            <p>{{diploma.place}}</p>
-            <p>{{ diploma.startedAt|date('Y-m-d') }}</p>
-            <p>{{ diploma.endedAt|date('Y-m-d') }}</p>
-            {% endfor %}
-            {% endif %} 
-
-            <h3>Skills</h3>
-            <ul class="list-group" id="skills"></ul>
-            {% if app.user %}
-            {% for skill in app.user.skills %}
-
-            <p>{{skill.name}}</p>
-            <p>{{skill.level}}</p>
-            {% endfor %}
-            {% endif %} 
-             
-            <h3>Professional Experiences</h3>
-            <div id="professionalExperiences"></div>
-            {% if app.user %}
-            {% for professionalExperience in app.user.professionalExperiences %}
-
-            <p>{{professionalExperience.title}}</p>
-            <p>{{professionalExperience.place}}</p>
-            <p>{{professionalExperience.missionStatement}}</p>
-            {% endfor %}
-            {% endif %} 
+<div class="row">
+    <div class="col-12">
+        <h3>Personal informations</h3>
+        <div id="personnalInformations"></div>
+        {% if app.user %}
+        {% for personalInformation in app.user.personalInformation %}
+        
+        <p>Firstname</p>
+        <p>{{personalInformation.firstname}}</p>
+        <p>Lastname</p>
+        <p>{{personalInformation.lastname}}</p>
+        <p>Address</p>
+        <p>{{personalInformation.address}}</p>
+        <p>Phone Number</p>
+        <p>{{personalInformation.phoneNumber}}</p>
+        <p>Linkedin Link</p>
+        <p>{{personalInformation.linkedinLink}}</p>
+        {% endfor %}
+        {% endif %} 
+        <h3>Languages</h3>
+        {% if app.user %}
+        {% for languageSpoken in app.user.languageSpokens %}
+        
+        <p>{{languageSpoken.name}}</p>
+        <p>{{languageSpoken.level}}</p>
+        <p>{{languageSpoken.name}} {{languageSpoken.level}}</p>
+        
+        {% endfor %}
+        {% endif %} 
+        <h3>Hobbies</h3>
+        {% if app.user %}
+        {% for hobbie in app.user.hobbies %}
+        <p>{{hobbie.name}}</p>
+        {% endfor %}
+        {% endif %} 
+        <h3>Skills</h3>
+        <ul class="list-group" id="skills"></ul>
+        {% if app.user %}
+        
+        
+        {% for skill in app.user.skills %}
+        
+        
+        <p>{{skill.name}} - {{skill.level}} / 10 </p>
+        
+        
+        {% endfor %}
+        
+        {% endif %} 
+        
+        <h3>Professional Experiences</h3>
+        <div id="professionalExperiences"></div>
+        {% if app.user %}
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 my-1">
+            <div class="card">
+                <div class="card-header">
+                    {% for professionalExperience in app.user.professionalExperiences %}
+                    
+                    <p>{{professionalExperience.title}}</p>
+                    <p>{{professionalExperience.place}}</p>
+                    
+                    <h3>{{professionalExperience.title}}</h3>
+                    <span class="text-muted">
+                        {{ professionalExperience.startedAt| date('Y-m')}} - {{professionalExperience.place}}
+                        
+                    </span>
+                    
+                    
+                    
+                    <p>{{professionalExperience.missionStatement}}</p>
+                    
+                    {% endfor %}
+                </div>
+                {% endif %} 
+            </div>
         </div>
-    </div>
-{% endblock %}
+        {% endblock %}
+        

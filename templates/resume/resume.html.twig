@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ResumeController!{% endblock %}
+
+{% block body %}
+
+{% for personalInformation in user.personalInformation %}
+                            <tr>
+                                <td class="text-center align-middle">{{ personalInformation.firstname }}</td>
+                                <td class="text-center align-middle">{{ personalInformation.lastname }}</td>
+                                <td class="text-center align-middle">{{ personalInformation.address }}</td>
+                                <td class="text-center align-middle">{{ personalInformation.phoneNumber }}</td>
+                                <td class="text-center align-middle">{{ personalInformation.linkedinLink }}</td>
+                                <td class="text-center align-middle">
+                                </td>
+                            </tr>
+                       
+                        {% endfor %}
+
+{% for skill in user.skills %}
+    <tr>
+        <td class="text-center align-middle">{{ skill.name }}</td>
+        <td class="text-center align-middle">{{ skill.level }}/10</td>
+        <td class="text-center align-middle">
+        </td>
+    </tr>
+
+{% endfor %}
+
+{% for languageSpoken in user.languageSpokens %}
+<tr>
+    <td class="text-center align-middle">{{ languageSpoken.name }}</td>
+    <td class="text-center align-middle">{{ languageSpoken.level }}</td>
+    <td class="text-center align-middle">
+    </td>
+</tr>
+{% else %}
+<tr>
+    <td colspan="5" class="text-center align-middle">No Languages</td>
+</tr>
+{% endfor %}
+{% endblock %}

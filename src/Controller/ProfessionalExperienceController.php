@@ -21,7 +21,7 @@ class ProfessionalExperienceController extends AbstractController
     {
         return $this->json($professionalExperienceRepository->findAll());
     }
-
+    
     #[Route('/professional/experience', name: 'professionalExperience_manage')]
     public function manage(ProfessionalExperienceRepository $professionalExperienceRepository): Response
     {
@@ -30,43 +30,43 @@ class ProfessionalExperienceController extends AbstractController
             'professionalExperiences' => $professionalExperiences
         ]);
     }
-
+    
     #[Route('/professional/experience/create', name: 'professionalExperience_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $professionalExperience = new ProfessionalExperience();
         $form = $this->createForm(ProfessionalExperienceType::class, $professionalExperience)->handleRequest($request);
-
-
+        
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $professionalExperience->setUser($this->getUser());
-
+            
             $entityManager->persist($professionalExperience);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('professionalExperience_manage', [], Response::HTTP_SEE_OTHER);
-
+            
         }
         return $this->render('professional_experience/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-
+    
     
     
     #[Route('professional/experience/update/{id}', name: 'professionalExperience_update')]
     public function update(ProfessionalExperience $professionalExperience, Request $request, EntityManagerInterface $entityManager): Response
     {
-       
+        
         $form = $this->createForm(ProfessionalExperienceType::class, $professionalExperience)->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $professionalExperience->setUser($this->getUser());
-
+            
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('professionalExperience_manage', [], Response::HTTP_SEE_OTHER);
-
+            
         }
         return $this->render('professional_experience/update.html.twig', [
             'form' => $form->createView(),
@@ -76,13 +76,12 @@ class ProfessionalExperienceController extends AbstractController
     #[Route('professional/experience/delete/{id}', name: 'professionalExperience_delete')]
     public function delete(Request $request, ProfessionalExperience $professionalExperience, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$professionalExperience->getId(), $request->request->get('_token'))) {
-
+        
         $entityManager->remove($professionalExperience);
         $entityManager->flush();
-        }
+        
         return $this->redirectToRoute('professionalExperience_manage', [], Response::HTTP_SEE_OTHER);
     }
-
-   
+    
+    
 }
