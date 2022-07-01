@@ -1,42 +1,157 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello ResumeController!{% endblock %}
-
+{% extends "base.html.twig" %}
+{% block metaTag %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
 {% block body %}
-
-{% for personalInformation in user.personalInformation %}
-                            <tr>
-                                <td class="text-center align-middle">{{ personalInformation.firstname }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.lastname }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.address }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.phoneNumber }}</td>
-                                <td class="text-center align-middle">{{ personalInformation.linkedinLink }}</td>
-                                <td class="text-center align-middle">
-                                </td>
-                            </tr>
-                       
-                        {% endfor %}
-
-{% for skill in user.skills %}
-    <tr>
-        <td class="text-center align-middle">{{ skill.name }}</td>
-        <td class="text-center align-middle">{{ skill.level }}/10</td>
-        <td class="text-center align-middle">
-        </td>
-    </tr>
-
-{% endfor %}
-
-{% for languageSpoken in user.languageSpokens %}
-<tr>
-    <td class="text-center align-middle">{{ languageSpoken.name }}</td>
-    <td class="text-center align-middle">{{ languageSpoken.level }}</td>
-    <td class="text-center align-middle">
-    </td>
-</tr>
-{% else %}
-<tr>
-    <td colspan="5" class="text-center align-middle">No Languages</td>
-</tr>
-{% endfor %}
+<style>
+    
+    .block-information {
+        background-color: #343946;
+        
+    }
+    .block-information {
+        width: 50%;
+    }
+    
+    .container {
+        margin: 0;
+        padding:0;
+        
+    }
+    html, body {
+        height: 100%; 
+        width: 100%;
+        margin: 0;
+        
+    }
+    .block-experience {
+        width: 900px;
+        
+    }
+    
+    .col-12 {
+        display: flex;
+    }
+    
+    .info-text, .title {
+        color: #F5F5F5;
+    }
+    .row {
+        height: 650px;
+    }
+    
+    
+    .text {
+        font-weight: bold;
+        
+        
+    }
+    .contain-title {
+        background: #1f232e;
+    }
+    
+    .text {
+        color: #01606d;
+    }
+    
+    .title-info {
+        color: #04A8B0;
+    }
+    
+</style>
+<div class="row">
+    <div class="col-12">
+        <div class="block-information">
+            <div class="contain-title"><h4 class="title">Personal informations</h4></div>
+            
+            <div id="personnalInformations"></div>
+            
+            {% for personalInformation in user.personalInformation %}
+            
+            <p class="text">Full Name</p>
+            <p class="info-text">{{personalInformation.firstname}} {{personalInformation.lastname}}</p>
+            
+            <p class="text">Address</p>
+            <p class="info-text">{{personalInformation.address}}</p>
+            <p class="text">Phone Number</p>
+            <p class="info-text">{{personalInformation.phoneNumber}}</p>
+            <p class="text">Linkedin Link</p>
+            <p class="info-text">{{personalInformation.linkedinLink}}</p>
+            {% endfor %}
+             
+            <div class="contain-title"> <h4 class="title">Languages</h4></div>
+            
+            {% for languageSpoken in user.languageSpokens %}
+            
+            
+            <p class="info-text">{{languageSpoken.name}} {{languageSpoken.level}}</p>
+            
+            {% endfor %}
+             
+            <div class="contain-title"><h4 class="title">Hobbies</h4></div>
+            
+            {% for hobbie in user.hobbies %}
+            <p class="info-text">{{hobbie.name}}</p>
+            {% endfor %}
+             
+            
+        </div>
+        
+        <div class="contain-professional-informations">
+            <div class="block-experience">
+                <h4 class="title-info">Professional Experiences</h4>
+                <div id="professionalExperiences"></div>
+                
+                
+                
+                
+                {% for professionalExperience in user.professionalExperiences %}
+                <span class="text-muted">
+                    {{ professionalExperience.startedAt| date('Y-m')}} - {{ professionalExperience.endedAt| date('Y-m')}} 
+                    
+                </span>
+                <p>{{professionalExperience.title}} - {{professionalExperience.place}}</p>
+                
+                
+                
+                <p>{{professionalExperience.missionStatement}}</p>
+                
+                {% endfor %}
+                
+                 
+                
+                
+                <h4 class="title-info">Skills</h4>
+                <ul class="list-group" id="skills"></ul>
+                
+                
+                
+                {% for skill in user.skills %}
+                
+                
+                <p>{{skill.name}} - {{skill.level}} / 10 </p>
+                
+                
+                {% endfor %}
+                 
+            </div>
+            
+            <h4 class="title-info">Diplomas</h4>
+            
+            {% for diploma in user.diplomas %}
+            <span class="text-muted">
+                {{ diploma.startedAt| date('Y-m')}} -  {{ diploma.endedAt| date('Y-m')}}
+                
+            </span>
+            <p>{{ diploma.title }} - {{ diploma.place }}</p>
+            
+            
+            
+            
+            {% endfor %}
+            
+        </div>
+        
+    </div>
+</div>
 {% endblock %}
