@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Form\SkillType;
 use App\Entity\Skill;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,14 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SkillController extends AbstractController
 {
-    
-    #[Route('/api/skills', name: 'api_skills_collection_get')]
-    public function collection(SkillRepository $skillRepository): JsonResponse
-    {
-        return $this->json($skillRepository->findAll());
-    }
-    
-    
     #[Route('/skill', name: 'skill_manage')]
     public function manage(SkillRepository $skillRepository): Response
     {

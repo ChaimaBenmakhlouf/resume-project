@@ -6,7 +6,6 @@ use App\Form\DiplomaType;
 use App\Entity\Diploma;
 use App\Entity\User;
 use App\Repository\DiplomaRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,13 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DiplomaController extends AbstractController
 {
-    
-    #[Route('/api/diplomas', name: 'api_diplomas_collection_get')]
-    public function collection(DiplomaRepository $diplomaRepository): JsonResponse
-    {
-        return $this->json($diplomaRepository->findAll());
-    }
-    
     #[Route('/diploma', name: 'diploma_manage')]
     public function manage(DiplomaRepository $diplomaRepository): Response
     {

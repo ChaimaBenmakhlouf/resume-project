@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Form\PersonalInformationType;
 use App\Entity\PersonalInformation;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\PersonalInformationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,14 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PersonalInformationController extends AbstractController
 {
-    
-    #[Route('/api/personal/informations', name: 'api_personalInformations_collection_get')]
-    public function collection(PersonalInformationRepository $personalInformationRepository): JsonResponse
-    {
-        return $this->json($personalInformationRepository->findAll());
-    }
-    
-    #[Route('/personal/informations', name: 'personalInformation_manage')]
+    #[Route('/personal/information', name: 'personalInformation_manage')]
     public function manage(PersonalInformationRepository $personalInformationRepository): Response
     {
         

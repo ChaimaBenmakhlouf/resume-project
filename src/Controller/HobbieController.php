@@ -6,7 +6,6 @@ use App\Form\HobbieType;
 use App\Entity\Hobbie;
 use App\Repository\HobbieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,13 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HobbieController extends AbstractController
 {
-    
-    #[Route('/api/hobbie', name: 'api_hobbie_collection_get')]
-    public function collection(HobbieRepository $hobbieRepository): JsonResponse
-    {
-        return $this->json($hobbieRepository->findAll());
-    }
-    
     #[Route('/hobbie', name: 'hobbie_manage')]
     public function manage(HobbieRepository $hobbieRepository): Response
     {

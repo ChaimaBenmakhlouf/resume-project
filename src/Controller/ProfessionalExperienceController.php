@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Form\ProfessionalExperienceType;
 use App\Entity\ProfessionalExperience;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\ProfessionalExperienceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfessionalExperienceController extends AbstractController
 
 {
-    #[Route('/api/professional/experience', name: 'api_professional/experience_collection_get')]
-    public function collection(ProfessionalExperienceRepository $professionalExperienceRepository): JsonResponse
-    {
-        return $this->json($professionalExperienceRepository->findAll());
-    }
-    
     #[Route('/professional/experience', name: 'professionalExperience_manage')]
     public function manage(ProfessionalExperienceRepository $professionalExperienceRepository): Response
     {

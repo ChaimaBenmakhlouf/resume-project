@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Form\LanguageSpokenType;
 use App\Entity\LanguageSpoken;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\LanguageSpokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class LanguageSpokenController extends AbstractController
 
 {
-    #[Route('/api/language/spoken', name: 'api_language/spoken_collection_get')]
-    public function collection(LanguageSpokenRepository $languageSpokenRepository): JsonResponse
-    {
-        return $this->json($languageSpokenRepository->findAll());
-    }
-    
     #[Route('/language/spoken', name: 'languageSpoken_manage')]
     public function manage(LanguageSpokenRepository $languageSpokenRepository): Response
     {

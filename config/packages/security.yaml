@@ -33,18 +33,12 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/diploma/*, roles: ROLE_USER }
-        - { path: ^/api/diploma, roles: ROLE_USER }
-        - { path: ^/home, roles: ROLE_USER }
-        - { path: ^/api/hobbie, roles: ROLE_USER }
         - { path: ^/hobbie/*, roles: ROLE_USER }
-        - { path: ^/api/personnal/informations, roles: ROLE_USER }
-        - { path: ^/personnal/information/*, roles: ROLE_USER }
-        - { path: ^/api/professional/experience, roles: ROLE_USER }
-        - { path: ^/professional/experience/*, roles: ROLE_USER }
-        - { path: ^/api/skills, roles: ROLE_USER }
-        - { path: ^/skill/*, roles: ROLE_USER }
+        - { path: ^/home, roles: ROLE_USER }
         - { path: ^/language/spoken/*, roles: ROLE_USER }
-
+        - { path: ^/personal/information/*, roles: ROLE_USER }
+        - { path: ^/professional/experience/*, roles: ROLE_USER }
+        - { path: ^/skill/*, roles: ROLE_USER }
 when@test:
     security:
         password_hashers:
